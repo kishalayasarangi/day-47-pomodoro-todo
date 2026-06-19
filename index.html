@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pomodoro + Todo</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="app-title">🍅 Pomodoro + Todo</h1>
+    <p class="subtitle">Stay focused · Link tasks to sessions · Day 47 of 120</p>
+
+    <div class="main-grid">
+
+      <!-- LEFT: TIMER -->
+      <div class="left-col">
+
+        <!-- MODE TABS -->
+        <div class="mode-tabs">
+          <button class="mode-btn active" id="btn-pomodoro"
+                  onclick="switchMode('pomodoro')">Pomodoro</button>
+          <button class="mode-btn" id="btn-short"
+                  onclick="switchMode('short')">Short Break</button>
+          <button class="mode-btn" id="btn-long"
+                  onclick="switchMode('long')">Long Break</button>
+        </div>
+
+        <!-- CURRENT TASK -->
+        <div class="current-task-bar" id="currentTaskBar">
+          <span class="ct-label">Working on:</span>
+          <span class="ct-name" id="currentTaskName">No task selected</span>
+        </div>
+
+        <!-- TIMER -->
+        <div class="timer-card">
+          <svg class="progress-ring" viewBox="0 0 220 220">
+            <circle class="ring-bg" cx="110" cy="110" r="96"/>
+            <circle class="ring-progress" id="ringProgress" cx="110" cy="110" r="96"/>
+          </svg>
+          <div class="timer-inner">
+            <div class="timer-display" id="timerDisplay">25:00</div>
+            <div class="timer-mode" id="timerMode">Focus Time</div>
+          </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="controls">
+          <button class="ctrl-btn" onclick="resetTimer()">↺</button>
+          <button class="start-btn" id="startBtn" onclick="toggleTimer()">Start</button>
+          <button class="ctrl-btn" onclick="skipSession()">⏭</button>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-row">
+          <div class="stat-box">
+            <span id="pomCount">0</span>
+            <label>Pomodoros</label>
+          </div>
+          <div class="stat-box">
+            <span id="focusTime">0m</span>
+            <label>Focus Time</label>
+          </div>
+          <div class="stat-box">
+            <span id="tasksCompleted">0</span>
+            <label>Tasks Done</label>
+          </div>
+        </div>
+
+        <!-- SESSION LOG -->
+        <div class="session-log-card">
+          <h3>Session Log</h3>
+          <ul class="session-log" id="sessionLog">
+            <li class="log-empty">No sessions yet</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: TODO -->
+      <div class="right-col">
+
+        <!-- ADD TASK -->
+        <div class="add-task-card">
+          <h3>Tasks</h3>
+          <div class="add-row">
+            <input type="text" id="taskInput"
+                   placeholder="Add a task..."
+                   onkeydown="if(event.key==='Enter') addTask()"/>
+            <select id="taskPriority">
+              <option value="high">🔴 High</option>
+              <option value="medium" selected>🟡 Medium</option>
+              <option value="low">🟢 Low</option>
+            </select>
+            <button onclick="addTask()">+</button>
+          </div>
+        </div>
+
+        <!-- FILTER -->
+        <div class="filter-tabs">
+          <button class="filter-btn active"
+                  onclick="setFilter('all', this)">All</button>
+          <button class="filter-btn"
+                  onclick="setFilter('active', this)">Active</button>
+          <button class="filter-btn"
+                  onclick="setFilter('completed', this)">Done</button>
+        </div>
+
+        <!-- TASKS LIST -->
+        <div class="tasks-list" id="tasksList"></div>
+
+        <!-- PROGRESS -->
+        <div class="progress-card">
+          <div class="progress-info">
+            <span id="progressText">0 / 0 tasks completed</span>
+            <span id="progressPct">0%</span>
+          </div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>Day 47 of 120 · Kishalaya Sarangi · NIT Rourkela</footer>
+  <script src="script.js"></script>
+</body>
+</html>
